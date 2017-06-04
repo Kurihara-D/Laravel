@@ -13,15 +13,9 @@ class TestController extends Controller
      */
     public function index()
     {
+//        throw new TestException('1111');
+ //       echo 123;
 
-
-        $a = 1;
-
-        $b = $a;
-        echo $b;
-//        throw new TestException('ssss');
-//        echo 123;
-        //
     }
 
     /**
@@ -41,7 +35,11 @@ class TestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {
+        $testParam = $request->json('test');
+        //echo $request;
+        throw new TestException('1111',400);
         //
     }
 

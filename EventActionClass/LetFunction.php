@@ -1,12 +1,18 @@
 <?php
 
 namespace App\EventActionClass;
-class LetFunction
+use Throwable;
+
+class LetFunction extends \Exception
 {
 
     private $param;
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 
-    public function setParam($status){
-        $this->param = json_encode($status);
+    public function setErr($status){
+        return $this->param = json_encode($status);
     }
 }

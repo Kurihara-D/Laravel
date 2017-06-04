@@ -2,8 +2,13 @@
 
 namespace App\Exceptions;
 
+use App\EventActionClass\LetFunction;
+use App\Http\Controllers\TestController;
+use App\MyException\TestException;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -22,6 +27,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Validation\ValidationException::class,
     ];
 
+
     /**
      * Report or log an exception.
      *
@@ -32,6 +38,21 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+
+        if ($exception instanceof TestException) {
+           $err = $exception->getMessage();
+           $exception->setParam($err);
+
+        }
+        if ($exception instanceof ModelNotFoundException){
+
+            $eerr = $exception->setParam($exception);
+
+//            $err = $exception->getMessage();
+
+
+        }
+
         parent::report($exception);
     }
 

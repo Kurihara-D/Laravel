@@ -2,19 +2,25 @@
 
 namespace App\MyException;
 
-
-use App\Events\Event;
+use Throwable;
 
 class TestException extends \Exception
 {
-    private $TestException;
+    private $param;
 
-    public function __construct($text)
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-//        $this->TestException = $text;
-        $text = $this->TestException;
-
-        event(new Event($text));
+        parent::__construct($message, $code, $previous);
     }
+
+    public function setParam($message){
+        $body = file_get_contents('php://input');
+        $decode = (array)json_decode($body);
+        $id = $decode['test'];
+        echo $message;
+        echo $this->param = json_encode($message.$id);
+
+    }
+
 
 }
